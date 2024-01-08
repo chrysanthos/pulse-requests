@@ -1,0 +1,43 @@
+{
+  "name": "chrysanthos/pulse-requests",
+  "description": "A Laravel Pulse package for Requests",
+  "keywords": [
+    "chrysanthos",
+    "Laravel Pulse",
+    "Laravel Pulse Requests"
+  ],
+  "homepage": "https://github.com/chrysanthos/pulse-requests",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Chrysanthos Prodromou",
+      "email": "me@chrysanthos.xyz",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^8.1",
+    "laravel/pulse": "^1.0@beta"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^8.17",
+    "mockery/mockery": "^1.5.0",
+    "phpunit/phpunit": "^10"
+  },
+  "autoload": {
+    "psr-4": {
+      "Chrysanthos\\PulseRequests\\": "src"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Chrysanthos\\PulseRequests\\PulseRequestsServiceProvider"
+      ]
+    }
+  }
+}
