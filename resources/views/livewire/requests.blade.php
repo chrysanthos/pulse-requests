@@ -3,12 +3,12 @@
 @endphp
 <x-pulse::card :cols="$cols" :rows="$rows" :class="$class">
     <x-pulse::card-header
-        name="Requests"
-        title="Time: {{ number_format($time) }}ms; Run at: {{ $runAt }};"
-        details="past {{ $this->periodForHumans() }}"
+            name="Requests"
+            title="Time: {{ number_format($time) }}ms; Run at: {{ $runAt }};"
+            details="past {{ $this->periodForHumans() }}"
     >
         <x-slot:icon>
-            <x-pulse::icons.rocket-launch />
+            <x-pulse::icons.rocket-launch/>
         </x-slot:icon>
         <x-slot:actions>
             <div class="flex flex-wrap gap-4">
@@ -38,21 +38,20 @@
 
     <x-pulse::scroll :expand="$expand" wire:poll.5s="">
         @if ($requests->isEmpty())
-            <x-pulse::no-results />
+            <x-pulse::no-results/>
         @else
             <div class="grid gap-3 mx-px mb-px">
                 <div wire:key="requests-graph">
                     <div class="mt-3 relative">
                         <div
-                            wire:ignore
-                            class="h-full"
-                            x-data="requestChart({
+                                wire:ignore
+                                x-data="requestChart({
                                     readings: @js($requests),
                                     sampleRate: {{ $config['sample_rate'] ?? 1 }},
                                 })"
                         >
                             <canvas x-ref="canvas"
-                                    class="ring-1 ring-gray-900/5 dark:ring-gray-100/10 bg-gray-50 dark:bg-gray-800 rounded-md shadow-sm"></canvas>
+                                    class="ring-1 ring-gray-900/5 dark:ring-gray-100/10 bg-gray-50 dark:bg-gray-800 rounded-md shadow-sm h-52"></canvas>
                         </div>
                     </div>
                 </div>
@@ -65,6 +64,34 @@
 <script>
     Alpine.data("requestChart", (config) => ({
         init() {
+            let baseDataset = (fromColor, toColor) => {
+                return {
+                    borderCapStyle: 'round',
+                    pointHitRadius: 20,
+                    pointRadius: 0,
+                    tension: 0.2,
+                    borderWidth: 1,
+                    fill: true,
+                    hover: {
+                        mode: 'nearest'
+                    },
+                    pointHoverRadius: 3,
+                    borderColor: fromColor,
+                    pointHoverBackgroundColor: fromColor,
+                    backgroundColor: (context) => {
+                        const chart = context.chart;
+                        const {ctx, chartArea} = chart;
+
+                        if (!chartArea) {
+                            // This case happens on initial chart load
+                            return;
+                        }
+
+                        return getGradient(ctx, chartArea, fromColor, toColor);
+                    },
+                }
+            }
+
             let chart = new Chart(
                 this.$refs.canvas,
                 {
@@ -74,33 +101,32 @@
                         datasets: [
                             {
                                 label: "Informational",
-                                borderColor: "rgba(107,114,128,0.5)",
                                 data: this.scale(config.readings.informational),
-                                order: 0
+                                ...baseDataset('#5B91FC7F', 'rgba(156,180,241,0.1)')
                             },
                             {
                                 label: "Successful",
-                                borderColor: "rgba(147,51,234,0.5)",
                                 data: this.scale(config.readings.successful),
-                                order: 1
+                                order: 1,
+                                ...baseDataset('rgba(142,227,183,0.64)', 'rgba(153,238,190,0.1)')
                             },
                             {
                                 label: "Redirection",
-                                borderColor: "#eab308",
                                 data: this.scale(config.readings.redirection),
-                                order: 2
+                                order: 2,
+                                ...baseDataset('#eab308', 'rgba(255,234,167,0.1)')
                             },
                             {
                                 label: "Client Error",
-                                borderColor: "#9333ea",
                                 data: this.scale(config.readings.client_error),
-                                order: 3
+                                order: 3,
+                                ...baseDataset('#9333ea', 'rgba(220,177,250,0.1)')
                             },
                             {
                                 label: "Server Error",
-                                borderColor: "#e11d48",
                                 data: this.scale(config.readings.server_error),
-                                order: 4
+                                order: 4,
+                                ...baseDataset('#e11d48', 'rgba(250,78,112,0.1)')
                             }
                         ]
                     },
@@ -155,7 +181,23 @@
                 }
             )
 
-            Livewire.on("requests-chart-update", ({ requests }) => {
+            function getGradient(ctx, chartArea, fromColor, toColor) {
+                let width, height, gradient;
+                const chartWidth = chartArea.right - chartArea.left;
+                const chartHeight = chartArea.bottom - chartArea.top;
+                if (!gradient || width !== chartWidth || height !== chartHeight) {
+                    // Create the gradient because this is either the first
+                    // render or the size of the chart has changed
+                    width = chartWidth;
+                    height = chartHeight;
+                    gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                    gradient.addColorStop(1, fromColor);
+                    gradient.addColorStop(0, toColor);
+                }
+                return gradient;
+            }
+
+            Livewire.on("requests-chart-update", ({requests}) => {
                 if (chart === undefined) {
                     return
                 }

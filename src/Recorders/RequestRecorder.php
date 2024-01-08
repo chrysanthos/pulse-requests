@@ -14,10 +14,9 @@ class RequestRecorder
     ];
 
     public function __construct(
-        protected Pulse      $pulse,
+        protected Pulse $pulse,
         protected Repository $config
-    )
-    {
+    ) {
         //
     }
 
@@ -41,6 +40,5 @@ class RequestRecorder
                 timestamp: $timestamp,
             )->count()->onlyBuckets();
         });
-
     }
 }
