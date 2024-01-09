@@ -64,7 +64,7 @@
 <script>
     Alpine.data("requestChart", (config) => ({
         init() {
-            let baseDataset = (fromColor, toColor) => {
+            let baseDataset = (color, fromColor, toColor) => {
                 return {
                     borderCapStyle: 'round',
                     pointHitRadius: 20,
@@ -76,8 +76,8 @@
                         mode: 'nearest'
                     },
                     pointHoverRadius: 3,
-                    borderColor: fromColor,
-                    pointHoverBackgroundColor: fromColor,
+                    borderColor: color,
+                    pointHoverBackgroundColor: color,
                     backgroundColor: (context) => {
                         const chart = context.chart;
                         const {ctx, chartArea} = chart;
@@ -102,31 +102,31 @@
                             {
                                 label: "Informational",
                                 data: this.scale(config.readings.informational),
-                                ...baseDataset('#5B91FC7F', 'rgba(156,180,241,0.1)')
+                                ...baseDataset('#5B91FC7F', '#5B91FC7F', 'rgba(156,180,241,0.1)')
                             },
                             {
                                 label: "Successful",
                                 data: this.scale(config.readings.successful),
                                 order: 1,
-                                ...baseDataset('rgba(142,227,183,0.64)', 'rgba(153,238,190,0.1)')
+                                ...baseDataset('#8EE3B7FF', 'rgba(142,227,183,0.2)', 'rgba(220,255,235,0.1)')
                             },
                             {
                                 label: "Redirection",
                                 data: this.scale(config.readings.redirection),
                                 order: 2,
-                                ...baseDataset('#eab308', 'rgba(255,234,167,0.1)')
+                                ...baseDataset('#eab308', '#eab308', 'rgba(255,234,167,0.1)')
                             },
                             {
                                 label: "Client Error",
                                 data: this.scale(config.readings.client_error),
                                 order: 3,
-                                ...baseDataset('#9333ea', 'rgba(220,177,250,0.1)')
+                                ...baseDataset('#882de7', '#882de7', 'rgba(136,45,231,0.27)')
                             },
                             {
                                 label: "Server Error",
                                 data: this.scale(config.readings.server_error),
                                 order: 4,
-                                ...baseDataset('#e11d48', 'rgba(250,78,112,0.1)')
+                                ...baseDataset('#e11d48', '#e11d48', 'rgba(250,78,112,0.1)')
                             }
                         ]
                     },
