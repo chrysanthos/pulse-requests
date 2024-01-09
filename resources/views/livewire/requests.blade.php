@@ -13,23 +13,23 @@
         <x-slot:actions>
             <div class="flex flex-wrap gap-4">
                 <div class="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    <div class="h-0.5 w-3 rounded-full bg-[#5B91FC7F]"></div>
+                    <div class="h-0.5 w-3 rounded-full" style="background-color: #5B91FC;"></div>
                     Informational
                 </div>
                 <div class="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    <div class="h-0.5 w-3 rounded-full bg-[#8EE3B7FF]"></div>
+                    <div class="h-0.5 w-3 rounded-full" style="background-color: #8EE3B7;"></div>
                     Successful
                 </div>
                 <div class="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    <div class="h-0.5 w-3 rounded-full bg-[#eab308]"></div>
+                    <div class="h-0.5 w-3 rounded-full" style="background-color: #eab308;"></div>
                     Redirection
                 </div>
                 <div class="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    <div class="h-0.5 w-3 rounded-full bg-[#882de7]"></div>
+                    <div class="h-0.5 w-3 rounded-full" style="background-color: #882de7;"></div>
                     Client Error
                 </div>
                 <div class="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    <div class="h-0.5 w-3 rounded-full bg-[#e11d48]"></div>
+                    <div class="h-0.5 w-3 rounded-full" style="background-color: #e11d48;"></div>
                     Server Error
                 </div>
             </div>
