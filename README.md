@@ -26,16 +26,10 @@ Add the card to your dashboard by editing `resources/views/vendor/pulse/dashboar
 ```
 Add the recorder to your `config/pulse.php` file
 ```php
-    'recorders' => [
-        \Chrysanthos\PulseRequests\Recorders\RequestRecorder::class => [],
-        (...)
-    ]
-```
-
-## Testing
-
-```bash
-composer test
+'recorders' => [
+    \Chrysanthos\PulseRequests\Recorders\RequestRecorder::class => [],
+    (...)
+]
 ```
 
 ## Changelog
