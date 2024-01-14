@@ -2,7 +2,7 @@
 
 namespace Chrysanthos\PulseRequests\Livewire;
 
-use Chrysanthos\PulseRequests\RequestRecorder;
+use Chrysanthos\PulseRequests\Recorders\RequestRecorder;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
