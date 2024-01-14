@@ -5,7 +5,6 @@ namespace Chrysanthos\PulseRequests\Livewire;
 use Chrysanthos\PulseRequests\Recorders\RequestRecorder;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Str;
 use Laravel\Pulse\Livewire\Card;
 use Livewire\Livewire;
 
@@ -14,7 +13,7 @@ class Requests extends Card
     public function render()
     {
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-        [$requests, $time, $runAt] = $this->remember(fn() => $this->graph(
+        [$requests, $time, $runAt] = $this->remember(fn () => $this->graph(
             ['informational', 'successful', 'redirection', 'client_error', 'server_error'],
             'count',
         ));
@@ -27,7 +26,7 @@ class Requests extends Card
             'requests' => $requests['request'],
             'time' => $time,
             'runAt' => $runAt,
-            'config' => Config::get('pulse.recorders.' . RequestRecorder::class),
+            'config' => Config::get('pulse.recorders.'.RequestRecorder::class),
         ]);
     }
 }
