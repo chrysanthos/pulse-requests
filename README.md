@@ -3,8 +3,9 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/chrysanthos/pulse-requests.svg?style=flat-square)](https://packagist.org/packages/chrysanthos/pulse-requests)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/chrysanthos/pulse-requests/fix-php-code-style-issues.yml?branch=main&label=code%20style)](https://github.com/chrysanthos/pulse-requests/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/chrysanthos/pulse-requests.svg?style=flat-square)](https://packagist.org/packages/chrysanthos/pulse-requests)
+
+This package logs all incoming requests with Laravel Pulse. They are categorized in 5 buckets according to their response's http status.
 ![screenshot.png](screenshot.png)
-This package lets you set up an OTP verification process upon user login.
 
 ## Installation
 
