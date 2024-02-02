@@ -18,12 +18,14 @@ class Requests extends Card
             'count',
         ));
 
+        $requestCollection = $requests['request'] ?? collect();
+
         if (Livewire::isLivewireRequest()) {
-            $this->dispatch('requests-chart-update', requests: $requests['request']);
+            $this->dispatch('requests-chart-update', requests: $requestCollection);
         }
 
         return View::make('requests::livewire.requests', [
-            'requests' => $requests['request'],
+            'requests' => $requestCollection,
             'time' => $time,
             'runAt' => $runAt,
             'config' => Config::get('pulse.recorders.'.RequestRecorder::class),
