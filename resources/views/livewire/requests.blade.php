@@ -219,7 +219,7 @@
             })
         },
         labels(readings) {
-            return Object.keys(readings)
+            return Object.keys(readings).map(formatDate)
         },
         scale(data) {
             return Object.values(data).map(value => value * (1 / config.sampleRate))
