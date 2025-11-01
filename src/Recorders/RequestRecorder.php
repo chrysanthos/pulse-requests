@@ -36,7 +36,7 @@ class RequestRecorder
                     default => 'server_error',
                 },
                 key: 'request',
-                //key: "{$connection}:{$queue}",
+                // key: "{$connection}:{$queue}",
                 timestamp: $timestamp,
             )->count()->onlyBuckets();
         });
